@@ -6,10 +6,6 @@ using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.IdentityModel.Abstractions;
 using System.Diagnostics;
 
-#if WINDOWS
-using Microsoft.Identity.Client.Desktop;
-#endif
-
 namespace SignInMaui.MSALClient
 {
     /// <summary>
@@ -89,9 +85,6 @@ namespace SignInMaui.MSALClient
             // Initialize the MSAL library by building a public client application
             this.PublicClientApplication = this.PublicClientApplicationBuilder
                 .WithRedirectUri($"msal{PublicClientSingleton.Instance.MSALClientHelper.AzureAdConfig.ClientId}://auth")
-#if WINDOWS
-                .WithWindowsEmbeddedBrowserSupport()
-#endif
                 .Build();
 
             await AttachTokenCache();
